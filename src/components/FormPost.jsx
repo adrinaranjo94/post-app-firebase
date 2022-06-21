@@ -13,7 +13,7 @@ const FormPost = (props) => {
     setBody(props.body);
   }, [props.body]);
   return (
-    <div>
+    <div style={{ display: "flex", flexDirection: "column", padding: "12px" }}>
       <TextField
         variant="filled"
         value={title}

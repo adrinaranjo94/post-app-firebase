@@ -1,4 +1,4 @@
-import { Button, Grid } from "@material-ui/core";
+import { Button, Divider, Grid } from "@material-ui/core";
 import {
   addDoc,
   collection,
@@ -55,6 +55,11 @@ export const Home = () => {
         <Grid item md={8}>
           {posts.map((post) => (
             <div
+              style={{
+                boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
+                margin: "16px 8px",
+                padding: "8px 12px",
+              }}
               onClick={() => {
                 setSelectedPost(post);
                 setTypeForm("edit");
@@ -63,6 +68,7 @@ export const Home = () => {
               <h1>
                 {post.id} {post.title}
               </h1>
+              <p>{post.body}</p>
               <Button
                 variant="outlined"
                 onClick={() => handleDeletePost(post.id)}
@@ -76,7 +82,24 @@ export const Home = () => {
           {typeForm === "add" ? (
             <FormPost type="add" onSubmit={handleAddPost} />
           ) : (
-            <FormPost {...selectedPost} type="edit" onSubmit={handleEditPost} />
+            <>
+              <FormPost
+                {...selectedPost}
+                type="edit"
+                onSubmit={handleEditPost}
+              />
+              <div style={{ padding: "12px" }}>
+                <Divider />
+                <Button
+                  variant="contained"
+                  onClick={() => setTypeForm("add")}
+                  fullWidth
+                  style={{ marginTop: "12px" }}
+                >
+                  Create new Post
+                </Button>
+              </div>
+            </>
           )}
         </Grid>
       </Grid>
